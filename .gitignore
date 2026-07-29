@@ -11,9 +11,5 @@ venv/
 # macOS
 .DS_Store
 
-# VS Code
-.vscode/
-
-
 # Large files
 *.zip
