@@ -13,3 +13,6 @@ venv/
 
 # Large files
 *.zip
+
+# Virtual Environment
+.venv/
