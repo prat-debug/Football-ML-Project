@@ -1,0 +1,23 @@
+# Core Data Processing
+numpy
+pandas
+
+# Data Visualization
+matplotlib
+seaborn
+plotly
+
+# Machine Learning Utilities
+scikit-learn
+scipy
+
+# Jupyter
+jupyterlab
+notebook
+ipykernel
+
+# File Handling
+openpyxl
+
+# Model Saving
+joblib
