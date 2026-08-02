@@ -16,3 +16,28 @@ venv/
 
 # Virtual Environment
 .venv/
+
+# Python
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+env/
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Large Compressed Files
+*.rar
+*.7z
+
+# Environment / Secrets
+.env
+
+# Temporary Files
+*.tmp
+*.temp
