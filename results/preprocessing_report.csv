@@ -1,0 +1,24 @@
+step,column,action,before,after,notes
+Duplicate Handling,All Columns,Remove exact duplicate rows,0,0,Exact duplicate records removed.
+Categorical Missing Values,player_name,Replace NULL with 'Unknown',0,0,Missing categorical information preserved as Unknown.
+Categorical Missing Values,first_name,Replace NULL with 'Unknown',1536,0,Missing categorical information preserved as Unknown.
+Categorical Missing Values,last_name,Replace NULL with 'Unknown',0,0,Missing categorical information preserved as Unknown.
+Categorical Missing Values,country,Replace NULL with 'Unknown',129,0,Missing categorical information preserved as Unknown.
+Categorical Missing Values,sub_position,Replace NULL with 'Unknown',0,0,Missing categorical information preserved as Unknown.
+Categorical Missing Values,preferred_foot,Replace NULL with 'Unknown',462,0,Missing categorical information preserved as Unknown.
+Categorical Missing Values,current_club_name,Replace NULL with 'Unknown',324,0,Missing categorical information preserved as Unknown.
+Categorical Missing Values,position_group,Replace NULL with 'Unknown',0,0,Missing categorical information preserved as Unknown.
+Numerical Missing Values,matches_played,Replace NULL with 0,0,0,Zero is meaningful for activity/transfer statistics.
+Numerical Missing Values,total_minutes,Replace NULL with 0,0,0,Zero is meaningful for activity/transfer statistics.
+Numerical Missing Values,total_goals,Replace NULL with 0,0,0,Zero is meaningful for activity/transfer statistics.
+Numerical Missing Values,total_assists,Replace NULL with 0,0,0,Zero is meaningful for activity/transfer statistics.
+Numerical Missing Values,total_goal_contributions,Replace NULL with 0,0,0,Zero is meaningful for activity/transfer statistics.
+Numerical Missing Values,transfer_count,Replace NULL with 0,0,0,Zero is meaningful for activity/transfer statistics.
+Numerical Missing Values,latest_transfer_fee,Replace NULL with 0,0,0,Zero is meaningful for activity/transfer statistics.
+Numerical Missing Values,highest_transfer_fee,Replace NULL with 0,0,0,Zero is meaningful for activity/transfer statistics.
+Market Value Handling,latest_market_value,Fill NULL with 0,0,0,Market value retained for ML problems that require it. No zero flag created.
+Market Value Handling,highest_market_value,Fill NULL with 0,0,0,Market value retained for ML problems that require it. No zero flag created.
+Numerical Missing Values,height_in_cm,Median imputation + missing flag,323,0,Median used because zero is not a valid football value.
+Remaining Numerical Missing Values,height_score,Median imputation + missing flag,323,0,Used only for numerical columns not explicitly defined as zero-based.
+Remaining Numerical Missing Values,physicality_score,Median imputation + missing flag,323,0,Used only for numerical columns not explicitly defined as zero-based.
+Remaining Numerical Missing Values,talent_score,Median imputation + missing flag,323,0,Used only for numerical columns not explicitly defined as zero-based.
