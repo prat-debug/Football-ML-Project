@@ -1,0 +1,9 @@
+position_group,n,pca_dims,k,k_chosen_by,silhouette,smallest_cluster
+Winger,2590,5,4,stability,0.19,344
+Striker,3017,5,4,stability,0.208,448
+Midfielder,3585,5,5,stability,0.182,404
+Other,389,5,2,stability,0.279,156
+Defensive Midfielder,1807,5,4,stability,0.225,156
+Full Back,2994,5,6,stability,0.212,106
+Centre Back,3748,5,3,stability,0.215,397
+Goalkeeper,1599,3,8,stability,0.322,27
