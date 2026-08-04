@@ -64,7 +64,7 @@ player = {
     "performance_score": 88,
     "physicality_score": 70,
 
-    "talent_score": 4
+    "talent_score": 66
 }
 
 player = pd.DataFrame([player])

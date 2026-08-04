@@ -233,23 +233,23 @@ if __name__ == "__main__":
 
     new_player = {
 
-        "age": 25,
+        "age": 32,
 
-        "height_in_cm": 180,
+        "height_in_cm": 188,
 
-        "matches_played": 30,
+        "matches_played": 23,
 
-        "minutes_per_match": 75,
+        "minutes_per_match": 73.2173913043478,
 
-        "goals_per_90": 0.60,
+        "goals_per_90":0.0534441805225653,
 
-        "assists_per_90": 0.20,
+        "assists_per_90": 0,
 
-        "estimated_xg": 15.0,
+        "estimated_xg": 0.0534441805225653,
 
-        "estimated_xa": 6.0,
+        "estimated_xa":0.0133610451306413,
 
-        "physicality_score": 70.0
+        "physicality_score": 82.4025397371345
 
     }
 
@@ -263,3 +263,6 @@ if __name__ == "__main__":
         cluster,
         category
     )
+
+
+#######################################################################################################
