@@ -1,0 +1,117 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="text-center hero-section">
+  <h1 class="display-4">Football Talent Discovery Platform</h1>
+
+  <p class="lead mt-4">
+    AI-powered Football Scouting & Analytics Platform for discovering similar
+    players, clustering footballers, predicting player ratings, finding hidden
+    gems and answering football-related queries.
+  </p>
+</div>
+
+<div class="row mt-5">
+  <!-- Recommendation -->
+
+  <div class="col-md-6 mb-4">
+    <div class="card h-100 shadow">
+      <div class="card-body">
+        <h3 class="card-title">
+          <i class="bi bi-search me-2"></i>
+
+          Player Recommendation
+        </h3>
+
+        <p class="card-text">
+          Find football players with similar playing styles using Machine
+          Learning.
+        </p>
+
+        <a href="{{ url_for('recommendation') }}" class="btn btn-primary">
+          Open Module
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Future Modules -->
+
+  <div class="col-md-6 mb-4">
+    <div class="card h-100 shadow">
+      <div class="card-body">
+        <h3 class="card-title">
+          <i class="bi bi-star-fill me-2"></i>
+
+          Player Rating Prediction
+        </h3>
+
+        <p class="card-text">Coming Soon...</p>
+
+        <button class="btn btn-secondary" disabled>Coming Soon</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 mb-4">
+    <div class="card h-100 shadow">
+      <div class="card-body">
+        <h3 class="card-title">
+          <i class="bi bi-gem me-2"></i>
+
+          Hidden Gem Discovery
+        </h3>
+
+        <p class="card-text">
+          Discover underrated football players with exceptional potential using
+          Machine Learning.
+        </p>
+
+        <button class="btn btn-secondary" disabled>Coming Soon</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 mb-4">
+    <div class="card h-100 shadow">
+      <div class="card-body">
+        <h3 class="card-title">
+          <i class="bi bi-diagram-3-fill me-2"></i>
+
+          Player Clustering
+        </h3>
+
+        <p class="card-text">
+          Group football players into meaningful performance-based clusters
+          using Machine Learning.
+        </p>
+
+        <a href="{{ url_for('clustering') }}" class="btn btn-primary">
+          Open Module
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6 mb-4">
+  <div class="card h-100 shadow">
+    <div class="card-body">
+      <h3 class="card-title">
+        <i class="bi bi-robot me-2"></i>
+
+        Football Assistant
+      </h3>
+
+      <p class="card-text">
+        Ask football-related questions using Retrieval Augmented Generation
+        (RAG).
+      </p>
+
+      <button class="btn btn-secondary" disabled>Coming Soon</button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

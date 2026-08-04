@@ -21,3 +21,6 @@ openpyxl
 
 # Model Saving
 joblib
+
+# Web
+flask

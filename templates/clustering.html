@@ -1,0 +1,155 @@
+{% extends "base.html" %} {% block content %}
+
+<h2 class="mb-4">Player Clustering</h2>
+
+<div class="card shadow">
+  <div class="card-body">
+    <form id="clusteringForm">
+      <div class="row">
+        <!-- Left Column -->
+
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label"> Age </label>
+
+            <input
+              type="number"
+              class="form-control"
+              id="age"
+              step="0.01"
+              required />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"> Matches Played </label>
+
+            <input
+              type="number"
+              class="form-control"
+              id="matches"
+              step="0.01"
+              required />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"> Goals per 90 </label>
+
+            <input
+              type="number"
+              class="form-control"
+              id="goals_per_90"
+              step="0.01"
+              required />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"> Expected Goals (xG) </label>
+
+            <input
+              type="number"
+              class="form-control"
+              id="estimated_xg"
+              step="0.01"
+              required />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"> Physicality Score </label>
+
+            <input
+              type="number"
+              class="form-control"
+              id="physicality_score"
+              step="0.01"
+              required />
+          </div>
+        </div>
+
+        <!-- Right Column -->
+
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label"> Height (cm) </label>
+
+            <input
+              type="number"
+              class="form-control"
+              id="height"
+              step="0.01"
+              required />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"> Minutes Played </label>
+
+            <input
+              type="number"
+              class="form-control"
+              id="minutes"
+              step="0.01"
+              required />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"> Assists per 90 </label>
+
+            <input
+              type="number"
+              class="form-control"
+              id="assists_per_90"
+              step="0.01"
+              required />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label"> Expected Assists (xA) </label>
+
+            <input
+              type="number"
+              class="form-control"
+              id="estimated_xa"
+              step="0.01"
+              required />
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-3">
+        <button type="submit" class="btn btn-primary">Predict Cluster</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Error Message -->
+
+<div
+  id="clusterError"
+  class="alert alert-danger mt-4"
+  style="display: none"></div>
+
+<!-- Prediction Card -->
+
+<div id="clusterResult" class="card shadow mt-5" style="display: none">
+  <div class="card-body text-center">
+    <h3>Player Cluster Prediction</h3>
+
+    <hr />
+
+    <h5 class="text-muted">Category</h5>
+
+    <h2 id="category" class="text-primary"></h2>
+
+    <br />
+
+    <h5 class="text-muted">Cluster ID</h5>
+
+    <h4 id="clusterId"></h4>
+  </div>
+</div>
+
+{% endblock %} {% block scripts %}
+
+<script src="{{ url_for('static', filename='js/clustering.js') }}"></script>
+
+{% endblock %}

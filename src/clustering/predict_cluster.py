@@ -16,7 +16,7 @@ Raw 9 features
 import joblib
 import pandas as pd
 
-from config import MODELS_DIR
+from src.clustering.config import MODELS_DIR
 
 
 # ==========================================================
