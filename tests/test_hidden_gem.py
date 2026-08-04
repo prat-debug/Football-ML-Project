@@ -52,7 +52,7 @@ player = {
     "height_in_cm": 178,
 
     "preferred_foot": "left",
-    "position_group": "Winger",
+    "position_group": "Goalkeeper",
 
     "goals_score": 4,
     "assists_score": 8,
@@ -64,7 +64,7 @@ player = {
     "performance_score": 88,
     "physicality_score": 70,
 
-    "talent_score": 4
+    "talent_score": 66
 }
 
 player = pd.DataFrame([player])
