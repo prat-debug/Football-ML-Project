@@ -1,0 +1,71 @@
+Algorithm,Representation,Cluster,Cluster Label,Players,Percentage
+KMeans,Linear PCA,Cluster 0,0,4880,24.735161437477824
+KMeans,Linear PCA,Cluster 1,1,4160,21.08571138932536
+KMeans,Linear PCA,Cluster 2,2,4302,21.805464037710983
+KMeans,Linear PCA,Cluster 3,3,6387,32.37366313548583
+KMeans,Kernel PCA (rbf),Cluster 0,0,4654,23.589639616807744
+KMeans,Kernel PCA (rbf),Cluster 1,1,6373,32.302701606771755
+KMeans,Kernel PCA (rbf),Cluster 2,2,4584,23.234831973237366
+KMeans,Kernel PCA (rbf),Cluster 3,3,4118,20.87282680318313
+KMeans,Kernel PCA (poly),Cluster 0,0,1133,5.7428151452177
+KMeans,Kernel PCA (poly),Cluster 1,1,1,0.005068680622433981
+KMeans,Kernel PCA (poly),Cluster 2,2,18561,94.07978103299712
+KMeans,Kernel PCA (poly),Cluster 3,3,34,0.17233514116275533
+KMeans,Kernel PCA (sigmoid),Cluster 0,0,4254,21.562167367834153
+KMeans,Kernel PCA (sigmoid),Cluster 1,1,5269,26.706878199604645
+KMeans,Kernel PCA (sigmoid),Cluster 2,2,6810,34.51771503877541
+KMeans,Kernel PCA (sigmoid),Cluster 3,3,3396,17.2132393937858
+KMeans,Kernel PCA (cosine),Cluster 0,0,4401,22.30726341933195
+KMeans,Kernel PCA (cosine),Cluster 1,1,4612,23.376755030665517
+KMeans,Kernel PCA (cosine),Cluster 2,2,6128,31.060874854275433
+KMeans,Kernel PCA (cosine),Cluster 3,3,4588,23.2551066957271
+GMM,Linear PCA,Cluster 0,0,1435,7.273556693192762
+GMM,Linear PCA,Cluster 1,1,3366,17.061178975112778
+GMM,Linear PCA,Cluster 2,2,2420,12.266207106290231
+GMM,Linear PCA,Cluster 3,3,12508,63.399057225404235
+GMM,Kernel PCA (rbf),Cluster 0,0,3533,17.907648639059254
+GMM,Kernel PCA (rbf),Cluster 1,1,4524,22.930711135891325
+GMM,Kernel PCA (rbf),Cluster 2,2,6783,34.380860661969685
+GMM,Kernel PCA (rbf),Cluster 3,3,4889,24.78077956307973
+GMM,Kernel PCA (poly),Cluster 0,0,301,1.525672867352628
+GMM,Kernel PCA (poly),Cluster 1,1,1,0.005068680622433981
+GMM,Kernel PCA (poly),Cluster 2,2,42,0.2128845861422272
+GMM,Kernel PCA (poly),Cluster 3,3,19385,98.25637386588271
+GMM,Kernel PCA (sigmoid),Cluster 0,0,2216,11.232196259313701
+GMM,Kernel PCA (sigmoid),Cluster 1,1,9963,50.49926504130975
+GMM,Kernel PCA (sigmoid),Cluster 2,2,2909,14.744791930660451
+GMM,Kernel PCA (sigmoid),Cluster 3,3,4641,23.5237467687161
+GMM,Kernel PCA (cosine),Cluster 0,0,3810,19.311673171473466
+GMM,Kernel PCA (cosine),Cluster 1,1,7773,39.39885447817933
+GMM,Kernel PCA (cosine),Cluster 2,2,6061,30.721273252572356
+GMM,Kernel PCA (cosine),Cluster 3,3,2085,10.56819909777485
+Hierarchical,Linear PCA,Cluster 0,0,19389,98.27664858837245
+Hierarchical,Linear PCA,Cluster 1,1,169,0.8566070251913426
+Hierarchical,Linear PCA,Cluster 2,2,170,0.8616757058137766
+Hierarchical,Linear PCA,Cluster 3,3,1,0.005068680622433981
+Hierarchical,Kernel PCA (rbf),Cluster 0,0,4781,24.233362055856862
+Hierarchical,Kernel PCA (rbf),Cluster 1,1,3662,18.561508439353236
+Hierarchical,Kernel PCA (rbf),Cluster 2,2,6242,31.638704445232907
+Hierarchical,Kernel PCA (rbf),Cluster 3,3,5044,25.566425059556998
+Hierarchical,Kernel PCA (poly),Cluster 0,0,19720,99.9543818743981
+Hierarchical,Kernel PCA (poly),Cluster 1,1,1,0.005068680622433981
+Hierarchical,Kernel PCA (poly),Cluster 2,2,7,0.03548076435703786
+Hierarchical,Kernel PCA (poly),Cluster 3,3,1,0.005068680622433981
+Hierarchical,Kernel PCA (sigmoid),Cluster 0,0,12922,65.4974910030919
+Hierarchical,Kernel PCA (sigmoid),Cluster 1,1,48,0.24329666987683105
+Hierarchical,Kernel PCA (sigmoid),Cluster 2,2,6758,34.25414364640884
+Hierarchical,Kernel PCA (sigmoid),Cluster 3,3,1,0.005068680622433981
+Hierarchical,Kernel PCA (cosine),Cluster 0,0,4278,21.68381570277257
+Hierarchical,Kernel PCA (cosine),Cluster 1,1,6134,31.091286938010036
+Hierarchical,Kernel PCA (cosine),Cluster 2,2,6765,34.28962441076588
+Hierarchical,Kernel PCA (cosine),Cluster 3,3,2552,12.935272948451518
+DBSCAN,Linear PCA,Noise,-1,4023,20.391302144051902
+DBSCAN,Linear PCA,Cluster 0,0,15680,79.47691215976481
+DBSCAN,Linear PCA,Cluster 1,1,5,0.0253434031121699
+DBSCAN,Linear PCA,Cluster 2,2,9,0.04561812560190582
+DBSCAN,Linear PCA,Cluster 3,3,12,0.06082416746920776
+DBSCAN,Kernel PCA (poly),Noise,-1,1643,8.32784226265903
+DBSCAN,Kernel PCA (poly),Cluster 0,0,18057,91.52516599929038
+DBSCAN,Kernel PCA (poly),Cluster 1,1,10,0.0506868062243398
+DBSCAN,Kernel PCA (poly),Cluster 2,2,10,0.0506868062243398
+DBSCAN,Kernel PCA (poly),Cluster 3,3,9,0.04561812560190582
