@@ -1,0 +1,5 @@
+Metric,Value
+Recommendation Algorithm,KNN
+Distance Metric,euclidean
+Number of Neighbors,3
+Average Neighbor Distance,0.381627
