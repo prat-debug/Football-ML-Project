@@ -65,6 +65,13 @@
                 Player Clustering
               </a>
             </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.endpoint == 'hidden_gem' %}active{% endif %}"
+                href="{{ url_for('hidden_gem') }}">
+                Hidden Gems
+              </a>
+            </li>
           </ul>
         </div>
       </div>

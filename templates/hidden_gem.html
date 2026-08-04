@@ -1,0 +1,514 @@
+{% extends "base.html" %} {% block content %}
+
+<h2 class="mb-4">
+  <i class="bi bi-gem me-2"></i>
+
+  Hidden Gem Discovery
+</h2>
+
+<div class="card shadow">
+  <div class="card-body">
+    <form id="hiddenGemForm" method="POST">
+      <!-- ====================================================== -->
+      <!-- Player Information -->
+      <!-- ====================================================== -->
+
+      <h4 class="mb-3 text-primary">Player Information</h4>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label"> Age </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="age"
+              step="0.01"
+              placeholder="21"
+              required />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label"> Height (cm) </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="height_in_cm"
+              step="0.01"
+              placeholder="180"
+              required />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label"> Preferred Foot </label>
+
+            <select class="form-select" name="preferred_foot" required>
+              <option value="right">right</option>
+              <option value="left">left</option>
+              <option value="both">both</option>
+              <option value="Unknown">unknown</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label"> Position Group </label>
+
+            <select class="form-select" name="position_group" required>
+              <option value="Winger">Winger</option>
+
+              <option value="Striker">Striker</option>
+
+              <option value="Midfielder">Midfielder</option>
+
+              <option value="Defensive Midfielder">Defensive Midfielder</option>
+
+              <option value="Full Back">Full Back</option>
+
+              <option value="Centre Back">Centre Back</option>
+
+              <option value="Goalkeeper">Goalkeeper</option>
+
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4" />
+
+      <!-- ====================================================== -->
+      <!-- Match Statistics -->
+      <!-- ====================================================== -->
+
+      <h4 class="mb-3 text-primary">Match Statistics</h4>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label"> Matches Played </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="matches_played"
+              step="0.01"
+              placeholder="38"
+              required />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label"> Total Minutes </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="total_minutes"
+              step="0.01"
+              placeholder="2850"
+              required />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label"> Total Goals </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="total_goals"
+              step="0.01"
+              placeholder="18"
+              required />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label"> Total Assists </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="total_assists"
+              step="0.01"
+              placeholder="9"
+              required />
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4" />
+
+      <!-- ====================================================== -->
+      <!-- Performance Metrics -->
+      <!-- ====================================================== -->
+
+      <h4 class="mb-3 text-primary">Performance Metrics</h4>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label class="form-label"> Goals per Match </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="goals_per_match"
+              step="0.01"
+              placeholder="0.47"
+              required />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label class="form-label"> Assists per Match </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="assists_per_match"
+              step="0.01"
+              placeholder="0.24"
+              required />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label class="form-label"> Minutes per Match </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="minutes_per_match"
+              step="0.01"
+              placeholder="75"
+              required />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label class="form-label"> Goals per 90 </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="goals_per_90"
+              step="0.01"
+              placeholder="0.57"
+              required />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label class="form-label"> Assists per 90 </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="assists_per_90"
+              step="0.01"
+              placeholder="0.29"
+              required />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label class="form-label"> Goal Contributions per 90 </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="goal_contributions_per_90"
+              step="0.01"
+              placeholder="0.86"
+              required />
+          </div>
+        </div>
+      </div>
+      <hr class="my-4" />
+
+      <!-- ====================================================== -->
+      <!-- Expected Metrics -->
+      <!-- ====================================================== -->
+
+      <h4 class="mb-3 text-primary">Expected Metrics</h4>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label"> Estimated xG </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="estimated_xg"
+              step="0.01"
+              placeholder="15.4"
+              required />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label"> Estimated xA </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="estimated_xa"
+              step="0.01"
+              placeholder="7.8"
+              required />
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4" />
+
+      <!-- ====================================================== -->
+      <!-- Engineered Scores -->
+      <!-- ====================================================== -->
+
+      <h4 class="mb-3 text-primary">Engineered Scores</h4>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label class="form-label"> Goals Score </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="goals_score"
+              step="0.01"
+              placeholder="82"
+              required />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label class="form-label"> Assists Score </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="assists_score"
+              step="0.01"
+              placeholder="74"
+              required />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label class="form-label"> Experience Score </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="experience_score"
+              step="0.01"
+              placeholder="63"
+              required />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label"> xG Score </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="xg_score"
+              step="0.01"
+              placeholder="80"
+              required />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label"> xA Score </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="xa_score"
+              step="0.01"
+              placeholder="71"
+              required />
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-4" />
+
+      <!-- ====================================================== -->
+      <!-- Overall Scores -->
+      <!-- ====================================================== -->
+
+      <h4 class="mb-3 text-primary">Overall Scores</h4>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label class="form-label"> Performance Score </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="performance_score"
+              step="0.01"
+              placeholder="78"
+              required />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label class="form-label"> Physicality Score </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="physicality_score"
+              step="0.01"
+              placeholder="70"
+              required />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label class="form-label"> Talent Score </label>
+
+            <input
+              type="number"
+              class="form-control"
+              name="talent_score"
+              step="0.01"
+              placeholder="84"
+              required />
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary px-5">
+          <i class="bi bi-search me-2"></i>
+
+          Predict Hidden Gem
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ====================================================== -->
+<!-- Error Message -->
+<!-- ====================================================== -->
+
+{% if error %}
+
+<div class="alert alert-danger mt-4">{{ error }}</div>
+
+{% endif %}
+
+<!-- ====================================================== -->
+<!-- Prediction Card -->
+<!-- ====================================================== -->
+
+{% if result %}
+
+<div id="result-card" class="card shadow mt-5 mx-auto" style="max-width: 700px">
+  <div class="card-body text-center">
+    <h3>
+      <i class="bi bi-gem text-warning"></i>
+
+      Hidden Gem Analysis
+    </h3>
+
+    <hr />
+    <div class="mt-4"></div>
+
+    <h5 class="text-muted">Prediction</h5>
+
+    {% if result.hidden_gem %}
+
+    <span class="badge bg-success fs-5 px-4 py-3"> Hidden Gem </span>
+    <div class="my-4"></div>
+
+    {% else %}
+
+    <span class="badge bg-primary fs-5 px-4 py-3"> Regular Player </span>
+    <div class="my-4"></div>
+
+    {% endif %}
+
+    <br />
+
+    <h5 class="text-muted">Anomaly Score</h5>
+
+    {% if result.score < 0 %}
+
+    <h2 class="fw-bold text-success">{{ result.score }}</h2>
+
+    {% else %}
+
+    <h2 class="fw-bold text-primary">{{ result.score }}</h2>
+
+    <div class="my-4"></div>
+
+    {% endif %}
+
+    <br />
+
+    <h5 class="text-muted">Potential</h5>
+
+    <h4>{{ result.interpretation }}</h4>
+  </div>
+</div>
+
+{% endif %} {% endblock %} {% block scripts %} {{ super() }}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const resultCard = document.getElementById("result-card");
+
+    if (resultCard) {
+      resultCard.scrollIntoView({
+        behavior: "smooth",
+
+        block: "center",
+      });
+    }
+  });
+</script>
+
+{% endblock %}

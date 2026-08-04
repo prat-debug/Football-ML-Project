@@ -309,3 +309,35 @@ tbody tr:hover {
     transform: translateY(0);
   }
 }
+
+/* ==========================
+   Placeholder Styling
+========================== */
+
+.form-control::placeholder {
+  color: #81a6c6;
+  opacity: 0.75;
+  font-style: italic;
+}
+
+.form-control::-webkit-input-placeholder {
+  color: #81a6c6;
+  font-style: italic;
+}
+
+.form-control:-ms-input-placeholder {
+  color: #81a6c6;
+}
+
+.form-control::-ms-input-placeholder {
+  color: #81a6c6;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #81a6c6;
+
+  box-shadow: 0 0 0 0.2rem rgba(129, 166, 198, 0.25);
+
+  background-color: #fcfeff;
+}
