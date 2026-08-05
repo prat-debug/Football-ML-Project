@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Player Clustering — Workbook</title>
+
+  <!-- Tailwind via Play CDN. No build step. Swap for a local CSS bundle in
+       production: `npx tailwindcss -i ./input.css -o ./static/tailwind.css --minify`. -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script>
+    // Custom palette: warm paper, deep ink, a single accent (forest -- pitch
+    // without being a football cliché). The other colours are kept around
+    // because the assistant bubbles use a slightly different ink for
+    // differentiation, not for decoration.
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper:   '#f7f4ee',         // warm off-white
+            paper2:  '#efeae0',         // slightly darker for borders/panels
+            'paper3':'#e6e0d2',         // tables, hover
+            ink:     '#1b1a17',         // body text
+            ink2:    '#4a4842',         // secondary text
+            ink3:    '#7a766e',         // tertiary, labels
+            rule:    '#d9d2bf',
+            accent:  '#2f6f3e',         // forest
+            accent2: '#1f4d2a',
+            'accent-soft': '#e7ede1',
+            warm:    '#a23b1c',         // for errors, sparingly
+          },
+          fontFamily: {
+            // Fraunces for the display headings. Inter Tight for UI.
+            display: ['Fraunces', 'Georgia', 'serif'],
+            sans:    ['"Inter Tight"', 'Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono:    ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+          },
+          keyframes: {
+            'fade-in': {
+              from: { opacity: '0', transform: 'translateY(3px)' },
+              to:   { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+          animation: {
+            'fade-in': 'fade-in 180ms ease-out',
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+
+<body class="h-full bg-paper text-ink antialiased font-sans">
+  <div class="min-h-screen flex flex-col">
+
+    <!-- Header. Plain, with a hairline border. No glow, no gradient. -->
+    <header class="border-b border-rule">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center gap-5">
+        <!-- Wordmark instead of an icon. The pitch line is a single thin SVG. -->
+        <div class="flex items-center gap-3">
+          <svg viewBox="0 0 40 40" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.4">
+            <rect x="3" y="6" width="34" height="28" rx="1" />
+            <line x1="20" y1="6" x2="20" y2="34" />
+            <circle cx="20" cy="20" r="4" />
+            <rect x="3" y="14" width="6" height="12" />
+            <rect x="31" y="14" width="6" height="12" />
+          </svg>
+          <div>
+            <h1 class="font-display text-[17px] font-semibold leading-tight tracking-tight">Player Clustering Workbook</h1>
+            <p class="text-[11px] uppercase tracking-[0.14em] text-ink3 mt-0.5">19,729 players · 8 position tiers</p>
+          </div>
+        </div>
+
+        <div class="flex-1"></div>
+
+        <!-- Tab switcher as inline text with an underline indicator (no pills). -->
+        <nav class="flex items-end gap-6 text-sm" role="tablist">
+          <button id="tabChat" role="tab" aria-selected="true"
+                  class="tab-btn relative pb-1 font-medium text-ink border-b-2 border-ink">
+            Notebook
+          </button>
+          <button id="tabOutputs" role="tab" aria-selected="false"
+                  class="tab-btn relative pb-1 font-medium text-ink3 hover:text-ink2 border-b-2 border-transparent">
+            Tables
+          </button>
+        </nav>
+
+        <button id="resetBtn"
+                class="text-[12px] px-3 py-1.5 border border-rule hover:border-ink2 hover:bg-paper2 transition text-ink2">
+          Clear notes
+        </button>
+      </div>
+    </header>
+
+    <!-- ====================== Chat panel ====================== -->
+    <section id="panelChat" role="tabpanel" class="flex-1 flex">
+      <!-- Left rail: a notebook-style margin with running notes (date / n. of questions).
+           Hidden on mobile, visible from md up. -->
+      <aside class="hidden md:block w-56 shrink-0 border-r border-rule bg-paper2/40">
+        <div class="sticky top-[73px] p-6 text-[12px] leading-relaxed">
+          <p class="font-mono text-ink3 uppercase tracking-[0.15em] text-[10px]">Session</p>
+          <p class="font-mono text-ink2 mt-2 break-all" id="sessionIdLabel">…</p>
+
+          <p class="font-mono text-ink3 uppercase tracking-[0.15em] text-[10px] mt-8">Asked</p>
+          <p class="font-display text-2xl text-ink mt-1" id="questionCount">0</p>
+          <p class="text-ink3 text-[11px]">questions so far</p>
+
+          <p class="font-mono text-ink3 uppercase tracking-[0.15em] text-[10px] mt-8">Sources</p>
+          <ul class="mt-2 text-ink2 space-y-1">
+            <li><span class="font-mono text-accent">SQL</span> against players.db</li>
+            <li><span class="font-mono text-accent">BM25</span> over docs/*</li>
+          </ul>
+
+          <p class="text-[11px] text-ink3 mt-8 leading-relaxed">
+            The model can only quote numbers it has pulled from a tool in this conversation. If it returns nothing, it says so.
+          </p>
+        </div>
+      </aside>
+
+      <main id="messages" class="flex-1 overflow-y-auto">
+        <div id="messageList" class="max-w-2xl mx-auto px-6 py-10 space-y-8">
+
+          <!-- Welcome -->
+          <div class="welcome-zone animate-fade-in">
+            <h2 class="font-display text-3xl text-ink leading-tight">What would you like to know?</h2>
+            <p class="text-ink2 text-[15px] mt-2 leading-relaxed">
+              The model routes by the kind of question: numbers go through SQL, methodology through the project's own docs.
+              Either way, every claim is grounded in a tool call.
+            </p>
+          </div>
+
+          <div class="welcome-zone grid sm:grid-cols-2 gap-3 animate-fade-in">
+            <button class="example text-left p-4 border border-rule hover:border-ink2 hover:bg-paper2 transition">
+              <div class="text-[10px] uppercase tracking-[0.15em] font-mono text-accent">01 · Numeric</div>
+              <div class="text-[14px] mt-1.5 text-ink">Top 10 strikers by xG per 90</div>
+            </button>
+            <button class="example text-left p-4 border border-rule hover:border-ink2 hover:bg-paper2 transition">
+              <div class="text-[10px] uppercase tracking-[0.15em] font-mono text-accent">02 · Method</div>
+              <div class="text-[14px] mt-1.5 text-ink">Why wasn't silhouette used to pick k?</div>
+            </button>
+            <button class="example text-left p-4 border border-rule hover:border-ink2 hover:bg-paper2 transition">
+              <div class="text-[10px] uppercase tracking-[0.15em] font-mono text-accent">03 · Both</div>
+              <div class="text-[14px] mt-1.5 text-ink">Is Messi in the Elite tier? Explain his cluster.</div>
+            </button>
+            <button class="example text-left p-4 border border-rule hover:border-ink2 hover:bg-paper2 transition">
+              <div class="text-[10px] uppercase tracking-[0.15em] font-mono text-accent">04 · Aggregate</div>
+              <div class="text-[14px] mt-1.5 text-ink">Average progressive passes by position and tier</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Composer. Inline at the bottom, no card, no shadow. -->
+        <footer class="border-t border-rule">
+          <div class="max-w-2xl mx-auto px-6 py-4">
+            <form id="composer" class="flex items-end gap-3">
+              <textarea
+                id="input"
+                rows="1"
+                placeholder="Ask about players, clusters, methodology…"
+                class="flex-1 resize-none max-h-40 bg-transparent border-b border-ink3 focus:border-ink outline-none py-2 text-[15px] text-ink placeholder-ink3 transition"
+              ></textarea>
+              <button id="sendBtn" type="submit"
+                      class="text-[12px] px-4 py-2 border border-ink text-ink hover:bg-ink hover:text-paper transition disabled:opacity-30 disabled:cursor-not-allowed">
+                <span class="hidden sm:inline">Send</span>
+                <span class="sm:hidden">↑</span>
+              </button>
+            </form>
+            <p class="mt-2 text-[11px] text-ink3 text-center">
+              <kbd class="font-mono border border-rule rounded px-1.5 py-0.5">Enter</kbd> to send
+              · <kbd class="font-mono border border-rule rounded px-1.5 py-0.5">Shift</kbd>+<kbd class="font-mono border border-rule rounded px-1.5 py-0.5">Enter</kbd> for newline
+            </p>
+          </div>
+        </footer>
+      </main>
+    </section>
+
+    <!-- ====================== Outputs panel ====================== -->
+    <section id="panelOutputs" role="tabpanel" class="hidden flex-1 overflow-y-auto">
+      <div class="max-w-6xl mx-auto px-6 py-8 grid lg:grid-cols-[260px,1fr] gap-10">
+
+        <!-- File list. Plain numbered list, no icon decoration. -->
+        <aside>
+          <h2 class="font-display text-lg text-ink">Output files</h2>
+          <p class="text-[12px] text-ink3 mt-1">CSVs written by the clustering pipeline.</p>
+          <div id="outputList" class="mt-5 divide-y divide-rule border-t border-rule">
+          </div>
+          <p id="outputListStatus" class="text-[11px] text-ink3 mt-3 font-mono uppercase tracking-[0.15em]"></p>
+        </aside>
+
+        <!-- Table viewer -->
+        <div class="min-w-0">
+          <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2 mb-4 pb-3 border-b border-ink">
+            <h2 id="outputTitle" class="font-display text-2xl text-ink">Select a file</h2>
+            <span id="outputPagerInfo" class="text-[11px] text-ink3 font-mono ml-auto"></span>
+          </div>
+          <p id="outputDescription" class="text-[13px] text-ink2 mb-4 leading-relaxed"></p>
+
+          <div class="flex items-center gap-3 mb-3">
+            <input id="outputSearch" type="search" placeholder="Filter rows…"
+                   class="w-56 px-3 py-1.5 text-[13px] bg-transparent border border-rule focus:border-ink2 outline-none transition placeholder-ink3" />
+            <button id="outputDownload" type="button"
+                    class="hidden text-[12px] px-3 py-1.5 border border-rule hover:border-ink2 hover:bg-paper2 transition text-ink2">
+              Download .csv
+            </button>
+          </div>
+
+          <div id="outputTableWrap" class="border border-rule bg-paper">
+            <div class="overflow-x-auto">
+              <table id="outputTable" class="min-w-full text-[13px]">
+                <thead id="outputTableHead" class="text-ink2 border-b border-rule">
+                </thead>
+                <tbody id="outputTableBody" class="divide-y divide-rule">
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-end gap-2 mt-3">
+            <button id="outputPrevBtn" type="button"
+                    class="text-[12px] px-3 py-1.5 border border-rule hover:border-ink2 hover:bg-paper2 transition disabled:opacity-30 disabled:cursor-not-allowed text-ink2">
+              ← Prev
+            </button>
+            <button id="outputNextBtn" type="button"
+                    class="text-[12px] px-3 py-1.5 border border-rule hover:border-ink2 hover:bg-paper2 transition disabled:opacity-30 disabled:cursor-not-allowed text-ink2">
+              Next →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="/static/app.js" defer></script>
+</body>
+</html>
