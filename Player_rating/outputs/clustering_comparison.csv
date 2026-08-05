@@ -1,0 +1,5 @@
+Model,Silhouette Score,Davies-Bouldin Index,Calinski-Harabasz Score,Number of Clusters,Noise Points,Noise Percentage,No Tiny Cluster Warning
+Hierarchical,0.20018362500432713,1.446332142085306,666.7021638774405,4.0,0.0,0.0,False
+GMM,0.12300358036645656,1.880364905294754,471.6811651608333,4.0,0.0,0.0,True
+KMeans,0.2391507726908801,1.385710951347927,811.3614544816978,4.0,0.0,0.0,False
+DBSCAN,0.0,inf,0.0,1.0,57.375,3.294025,True
