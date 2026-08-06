@@ -71,11 +71,11 @@ RESULTS_DIR.mkdir(
 #     / "clean_player_features.csv"
 # )
 
-# # Preprocessing report
-# REPORT_FILE = (
-#     RESULTS_DIR
-#     / "preprocessing_report.csv"
-# )
+# Preprocessing report
+REPORT_FILE = (
+    RESULTS_DIR
+    / "preprocessing_report.csv"
+)
 
 
 # # ============================================================
