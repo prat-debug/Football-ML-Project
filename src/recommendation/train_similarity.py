@@ -104,6 +104,7 @@ print(performance_file)
 print("\nCreating Recommendation Engine...")
 
 engine = RecommendationEngine(
+    df=df,
 
     player_names=player_names,
 

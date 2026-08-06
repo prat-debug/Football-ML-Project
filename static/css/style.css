@@ -429,3 +429,16 @@ tbody tr:hover {
 .navbar-collapse {
   justify-content: flex-end;
 }
+
+/* ==========================================================
+   TABLEAU DASHBOARDS
+========================================================== */
+
+.tableauPlaceholder {
+  width: 100%;
+}
+
+.tableauPlaceholder object {
+  width: 100% !important;
+  min-height: 820px;
+}

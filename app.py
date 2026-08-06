@@ -438,6 +438,40 @@ def hidden_gem():
     )
 
 # ==========================================================
+# DASHBOARD HOME
+# ==========================================================
+
+@app.route("/dashboards")
+def dashboards():
+    return render_template("dashboard_home.html")
+
+# ==========================================================
+# RECOMMENDATION DASHBOARD
+# ==========================================================
+
+@app.route("/dashboards/recommendation")
+def recommendation_dashboard():
+    return render_template("recommendation_dashboard.html")
+
+
+# ==========================================================
+# HIDDEN GEM DASHBOARD
+# ==========================================================
+
+@app.route("/dashboards/hidden-gem")
+def hidden_gem_dashboard():
+    return render_template("hidden_gem_dashboard.html")
+
+
+# ==========================================================
+# PLAYER CLUSTERING DASHBOARD
+# ==========================================================
+
+@app.route("/dashboards/clustering")
+def clustering_dashboard():
+    return render_template("clustering_dashboard.html")
+
+# ==========================================================
 # GET SAVED PLAYERS
 # ==========================================================
 

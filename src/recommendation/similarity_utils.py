@@ -182,12 +182,14 @@ class RecommendationEngine:
 
     def __init__(
     self,
+    df,
     player_names,
     preprocessor,
     features,
     model,
     best_params
     ):
+        self.df = df
 
         self.player_names = list(player_names)
 
@@ -235,6 +237,7 @@ class RecommendationEngine:
             )
 
             results = []
+            tableau_results = []
 
             for distance, index in zip(
 
@@ -252,6 +255,58 @@ class RecommendationEngine:
             "Distance": round(distance, 4)
 
             })
+                player_info = self.df.iloc[index]
+
+                tableau_results.append({
+
+                    "Query Player": player_name,
+
+                    "Recommended Player": self.player_names[index],
+
+                    "Rank": len(results),
+
+                    "Method": "KNN",
+
+                    "Distance": round(distance, 4),
+
+                    "Age": player_info["age"],
+
+                    "Height (cm)": player_info["height_in_cm"],
+
+                    "Position": player_info["sub_position"],
+
+                    "Goals/90": player_info["goals_per_90"],
+
+                    "Assists/90": player_info["assists_per_90"],
+
+                    "Estimated xG": player_info["estimated_xg"],
+
+                    "Estimated xA": player_info["estimated_xa"],
+
+                    "Minutes/Match": player_info["minutes_per_match"],
+
+                    "Physicality Score": player_info["physicality_score"],
+
+                    "Performance Score": player_info["performance_score"],
+
+                    "Talent Score": player_info["talent_score"]
+
+                })
+            tableau_df = pd.DataFrame(tableau_results)
+            print(tableau_df.head())
+            output_dir = Path("results/tableau")
+            output_dir.mkdir(parents=True, exist_ok=True)
+
+            output_file = output_dir / "recommendation_dashboard_data.csv"
+
+            tableau_df.to_csv(
+                output_file,
+                mode="a",
+                header=not output_file.exists(),
+                index=False
+            )
+
+            print(f"Tableau data exported to: {output_file}")
             return pd.DataFrame(results)
 
 
@@ -266,6 +321,7 @@ class RecommendationEngine:
             order = np.argsort(similarities)[::-1]
 
             results = []
+            tableau_results = []
 
             for index in order[1:top_n+1]:
 
@@ -278,7 +334,58 @@ class RecommendationEngine:
                     "Similarity": round(similarities[index], 4)
 
                 })
+                player_info = self.df.iloc[index]
 
+                tableau_results.append({
+
+                    "Query Player": player_name,
+
+                    "Recommended Player": self.player_names[index],
+
+                    "Rank": len(results),
+
+                    "Method": "Cosine Similarity",
+
+                    "Similarity": round(similarities[index], 4),
+
+                    "Age": player_info["age"],
+
+                    "Height (cm)": player_info["height_in_cm"],
+
+                    "Position": player_info["sub_position"],
+
+                    "Goals/90": player_info["goals_per_90"],
+
+                    "Assists/90": player_info["assists_per_90"],
+
+                    "Estimated xG": player_info["estimated_xg"],
+
+                    "Estimated xA": player_info["estimated_xa"],
+
+                    "Minutes/Match": player_info["minutes_per_match"],
+
+                    "Physicality Score": player_info["physicality_score"],
+
+                    "Performance Score": player_info["performance_score"],
+
+                    "Talent Score": player_info["talent_score"]
+
+                })
+            tableau_df = pd.DataFrame(tableau_results)
+            print(tableau_df.head())
+            output_dir = Path("results/tableau")
+            output_dir.mkdir(parents=True, exist_ok=True)
+
+            output_file = output_dir / "recommendation_dashboard_data.csv"
+
+            tableau_df.to_csv(
+                output_file,
+                mode="a",
+                header=not output_file.exists(),
+                index=False
+            )
+
+            print(f"Tableau data exported to: {output_file}")
             return pd.DataFrame(results)
 
 
