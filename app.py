@@ -34,6 +34,13 @@ sys.modules["predict_cluster"] = predict_cluster
 from src.clustering.predict_cluster import load_pipeline
 from src.clustering.predict_cluster import predict_player
 
+# ==========================================================
+# DATABASE IMPORTS
+# ==========================================================
+from database.database_utils import save_recommendation
+from database.database_utils import save_hidden_gem
+from database.database_utils import save_player
+from database.database_utils import get_saved_players
 
 # ==========================================================
 # LOAD RECOMMENDATION ENGINE
@@ -128,6 +135,36 @@ def recommend():
             top_n=top_n
 
         )
+        print(recommendations.columns.tolist())
+        print(recommendations.head())
+        # Save recommendation history
+        # we save only the best recommendation.
+
+        if not recommendations.empty:
+
+            first_player = recommendations.iloc[0]
+
+            if method == "knn":
+
+                recommendation_score = float(
+                    first_player["Distance"]
+                )
+
+            else:
+
+                recommendation_score = float(
+                    first_player["Similarity"]
+                )
+
+            save_recommendation(
+                player_name=player_name,
+
+                recommended_player=first_player["Player"],
+
+                recommendation_score=recommendation_score,
+
+                method=method
+            )
 
         return jsonify(
 
@@ -144,6 +181,45 @@ def recommend():
             "error": str(e)
 
         })
+
+# ==========================================================
+# SAVE RECOMMENDED PLAYERS
+# ==========================================================
+
+@app.route("/save-player", methods=["POST"])
+def save_player_route():
+
+    data = request.get_json()
+
+    player_name = data.get("player_name")
+
+    source_module = data.get("source_module")
+
+    try:
+
+        save_player(
+
+            player_name=player_name,
+
+            source_module=source_module
+
+        )
+
+        return jsonify({
+
+            "success": True
+
+        })
+
+    except Exception as e:
+
+        return jsonify({
+
+            "success": False,
+
+            "error": str(e)
+
+        }), 500
 
 # ==========================================================
 # PREDICT PLAYER CLUSTER
@@ -294,6 +370,17 @@ def hidden_gem():
                 player_data,
                 hidden_gem_pipeline
             )
+            print(result)
+            # Save the result
+            save_hidden_gem(
+                prediction=result["prediction"],
+
+                anomaly_score=float(result["score"]),
+
+                hidden_gem=bool(result["hidden_gem"]),
+
+                potential=result["interpretation"]
+            )
 
         except Exception as e:
 
@@ -306,6 +393,23 @@ def hidden_gem():
         result=result,
 
         error=error
+
+    )
+
+# ==========================================================
+# GET SAVED PLAYERS
+# ==========================================================
+
+@app.route("/saved-players")
+def saved_players():
+
+    players = get_saved_players()
+
+    return render_template(
+
+        "saved_players.html",
+
+        players=players
 
     )
 

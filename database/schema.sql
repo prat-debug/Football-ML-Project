@@ -14,7 +14,9 @@ CREATE TABLE IF NOT EXISTS recommendation_history (
 
     recommended_player VARCHAR(100),
 
-    similarity_score FLOAT,
+    recommendation_score FLOAT,
+
+    method VARCHAR(20),
 
     recommendation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 

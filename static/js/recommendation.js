@@ -94,6 +94,8 @@ form.addEventListener("submit", async function (event) {
 
             <th>${metricColumn}</th>
 
+            <th>Save</th>
+
         `;
 
     // ==========================================================
@@ -111,20 +113,70 @@ form.addEventListener("submit", async function (event) {
 
       tableBody.innerHTML += `
 
-                <tr>
+        <tr>
 
-                    <td>${row.Rank}</td>
+            <td>${row.Rank}</td>
 
-                    <td>${row.Player}</td>
+            <td>${row.Player}</td>
 
-                    <td>${metricValue}</td>
+            <td>${metricValue}</td>
 
-                </tr>
+            <td>
 
-            `;
+                <button
+                    class="save-player-btn"
+                    data-player="${row.Player}">
+
+                    <i class="bi bi-bookmark-heart"></i>
+
+                    Save
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
     });
 
     resultsSection.style.display = "block";
+    // ==========================================================
+    // SAVE PLAYER
+    // ==========================================================
+
+    document.querySelectorAll(".save-player-btn").forEach((button) => {
+      button.addEventListener("click", async function () {
+        const response = await fetch("/save-player", {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            player_name: this.dataset.player,
+
+            source_module: "Recommendation",
+          }),
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          this.classList.add("saved");
+
+          this.innerHTML = `
+                    <i class="bi bi-bookmark-check-fill"></i>
+                    Saved
+                `;
+
+          this.disabled = true;
+        } else {
+          alert(result.error);
+        }
+      });
+    });
   } catch (error) {
     errorMessage.innerHTML =
       "Something went wrong while fetching recommendations.";

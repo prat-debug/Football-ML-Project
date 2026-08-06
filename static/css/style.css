@@ -341,3 +341,67 @@ tbody tr:hover {
 
   background-color: #fcfeff;
 }
+
+/* ==========================================================
+   SAVE PLAYER BUTTON
+========================================================== */
+
+.save-player-btn {
+  min-width: 120px;
+
+  border: 2px solid var(--blue);
+
+  color: var(--blue);
+
+  background: white;
+
+  border-radius: 10px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  transition: all 0.35s ease;
+}
+
+.save-player-btn::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: -100%;
+
+  width: 100%;
+
+  height: 100%;
+
+  background: var(--light-blue);
+
+  transition: 0.35s;
+
+  z-index: -1;
+}
+
+.save-player-btn:hover::before {
+  left: 0;
+}
+
+.save-player-btn:hover {
+  color: white;
+
+  border-color: var(--blue);
+
+  transform: translateY(-4px);
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+}
+
+.save-player-btn.saved {
+  background: #198754;
+
+  color: white;
+
+  border-color: #198754;
+}

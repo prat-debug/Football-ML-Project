@@ -72,6 +72,15 @@
                 Hidden Gems
               </a>
             </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.endpoint == 'saved_players' %}active{% endif %}"
+                href="{{ url_for('saved_players') }}">
+                <i class="bi bi-bookmark-heart me-1"></i>
+
+                Saved Players
+              </a>
+            </li>
           </ul>
         </div>
       </div>
