@@ -7,6 +7,7 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask import jsonify
+from flask import session
 
 from src.recommendation import similarity_utils
 
@@ -43,6 +44,45 @@ from database.database_utils import save_player
 from database.database_utils import get_saved_players
 
 # ==========================================================
+# CHATBOT IMPORTS
+# ==========================================================
+
+from uuid import uuid4
+from chatbot.engine import ChatEngine
+
+print("\nLoading Football Scout AI...")
+
+chat_sessions = {}
+
+print("Football Scout AI Ready.\n")
+
+# ==========================================================
+# Football Scout AI
+# ==========================================================
+
+def get_chat_engine():
+
+    if "chat_session_id" not in session:
+
+        session["chat_session_id"] = str(
+            uuid4()
+        )
+
+    session_id = session[
+        "chat_session_id"
+    ]
+
+    if session_id not in chat_sessions:
+
+        chat_sessions[
+            session_id
+        ] = ChatEngine()
+
+    return chat_sessions[
+        session_id
+    ]
+
+# ==========================================================
 # LOAD RECOMMENDATION ENGINE
 # ==========================================================
 
@@ -76,6 +116,7 @@ print("Hidden Gem Model Loaded.\n")
 # ==========================================================
 
 app = Flask(__name__)
+app.secret_key = "football_talent_discovery_secret_key"
 
 
 # ==========================================================
@@ -412,6 +453,110 @@ def saved_players():
         players=players
 
     )
+
+# ==========================================================
+# CHATBOT
+# ==========================================================
+
+@app.route("/chat", methods=["POST"])
+def chat():
+
+    data = request.get_json()
+
+    user_message = data.get("message", "").strip()
+
+    if not user_message:
+
+        return jsonify({
+
+            "success": False,
+
+            "error": "Message cannot be empty."
+
+        }), 400
+
+    try:
+
+        engine = get_chat_engine()
+
+        reply = engine.send(user_message)
+
+        return jsonify({
+
+            "success": True,
+
+            "reply": reply.text
+
+        })
+
+    except Exception as e:
+
+        print(e)
+
+        return jsonify({
+
+            "success": False,
+
+            "error": str(e)
+
+        }), 500
+
+
+@app.route("/chat-test")
+def chat_test():
+
+    engine = get_chat_engine()
+
+    reply = engine.send("Who is Erling Haaland?")
+
+    return f"<pre>{reply.text}</pre>"
+
+@app.route("/scout-ai")
+def scout_ai():
+    return render_template("scout_ai.html")
+
+@app.route("/ask-scout-ai", methods=["POST"])
+def ask_scout_ai():
+
+    try:
+
+        data = request.get_json()
+
+        question = data.get("question", "").strip()
+
+        if not question:
+
+            return jsonify({
+
+                "success": False,
+
+                "error": "Please enter a question."
+
+            }), 400
+
+        engine = get_chat_engine()
+
+        reply = engine.send(question)
+
+        return jsonify({
+
+            "success": True,
+
+            "answer": reply.text
+
+        })
+
+    except Exception as e:
+
+        print(e)
+
+        return jsonify({
+
+            "success": False,
+
+            "error": str(e)
+
+        }), 500
 
 # ==========================================================
 # RUN APPLICATION

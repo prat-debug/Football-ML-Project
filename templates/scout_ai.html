@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block content %}
+
+<h2 class="mb-4">
+  <i class="bi bi-robot me-2"></i>
+  Scout AI
+</h2>
+
+<div class="card shadow">
+  <div class="card-body">
+    <p class="text-muted mb-4">
+      Ask football-related questions using our Retrieval Augmented Generation
+      (RAG) assistant trained on football scouting knowledge.
+    </p>
+
+    <form id="scoutAIForm">
+      <div class="mb-4">
+        <label class="form-label"> Ask your question </label>
+
+        <textarea
+          id="question"
+          class="form-control"
+          rows="5"
+          placeholder="Example: Who is Erling Haaland?"
+          required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        <i class="bi bi-send me-2"></i>
+        Ask Scout AI
+      </button>
+    </form>
+  </div>
+</div>
+
+<div id="chatError" class="alert alert-danger mt-4" style="display: none"></div>
+
+<div id="chatResult" class="card shadow mt-5" style="display: none">
+  <div class="card-body">
+    <h3 class="mb-3">
+      <i class="bi bi-chat-left-text me-2"></i>
+      Scout AI Response
+    </h3>
+
+    <hr />
+
+    <div id="chatAnswer" style="white-space: pre-wrap; line-height: 1.8"></div>
+  </div>
+</div>
+
+{% endblock %} {% block scripts %}
+<script src="{{ url_for('static', filename='js/scout_ai.js') }}"></script>
+{% endblock %}

@@ -7,6 +7,13 @@
 
     <title>Football Talent Discovery</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap"
+      rel="stylesheet" />
+
     <!-- Bootstrap CSS -->
 
     <link
@@ -28,8 +35,9 @@
     <!-- Navigation Bar -->
 
     <nav class="navbar navbar-expand-lg">
-      <div class="container">
+      <div class="container-fluid px-5">
         <a class="navbar-brand" href="{{ url_for('home') }}">
+          <i class="bi bi-dribbble me-2"></i>
           Football Talent Discovery
         </a>
 
@@ -47,6 +55,7 @@
               <a
                 class="nav-link {% if request.endpoint == 'home' %}active{% endif %}"
                 href="{{ url_for('home') }}">
+                <i class="bi bi-house-door me-1"></i>
                 Home
               </a>
             </li>
@@ -55,6 +64,7 @@
               <a
                 class="nav-link {% if request.endpoint == 'recommendation' %}active{% endif %}"
                 href="{{ url_for('recommendation') }}">
+                <i class="bi bi-stars me-1"></i>
                 Recommendation
               </a>
             </li>
@@ -62,6 +72,7 @@
               <a
                 class="nav-link {% if request.endpoint == 'clustering' %}active{% endif %}"
                 href="{{ url_for('clustering') }}">
+                <i class="bi bi-diagram-3 me-1"></i>
                 Player Clustering
               </a>
             </li>
@@ -69,7 +80,17 @@
               <a
                 class="nav-link {% if request.endpoint == 'hidden_gem' %}active{% endif %}"
                 href="{{ url_for('hidden_gem') }}">
+                <i class="bi bi-gem me-1"></i>
                 Hidden Gems
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% if request.endpoint == 'scout_ai' %}active{% endif %}"
+                href="{{ url_for('scout_ai') }}">
+                <i class="bi bi-robot me-1"></i>
+
+                Scout AI
               </a>
             </li>
             <li class="nav-item">
