@@ -41,3 +41,6 @@ Desktop.ini
 # Temporary Files
 *.tmp
 *.temp
+
+# Environment File
+.env

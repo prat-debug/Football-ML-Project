@@ -59,85 +59,100 @@ RESULTS_DIR.mkdir(
 # INPUT AND OUTPUT FILES
 # ============================================================
 
-# Raw input file
-INPUT_FILE = (
-    RAW_DIR
-    / "final_destination.xlsx"
-)
+# # Raw input file
+# INPUT_FILE = (
+#     RAW_DIR
+#     / "final_destination.xlsx"
+# )
 
-# Clean master dataset
-CLEAN_FILE = (
-    CLEANED_DIR
-    / "clean_player_features.csv"
-)
+# # Clean master dataset
+# CLEAN_FILE = (
+#     CLEANED_DIR
+#     / "clean_player_features.csv"
+# )
 
-# Preprocessing report
-REPORT_FILE = (
-    RESULTS_DIR
-    / "preprocessing_report.csv"
-)
+# # Preprocessing report
+# REPORT_FILE = (
+#     RESULTS_DIR
+#     / "preprocessing_report.csv"
+# )
 
 
-# ============================================================
-# 1. LOAD DATA
-# ============================================================
+# # ============================================================
+# # 1. LOAD DATA
+# # ============================================================
+
+# print("=" * 80)
+# print("FOOTBALL TALENT DISCOVERY - COMMON PREPROCESSING PIPELINE")
+# print("=" * 80)
+
+# print("\nLoading dataset...")
+
+# print("\nProject Root:")
+# print(PROJECT_ROOT)
+
+# print("\nRaw Input File:")
+# print(INPUT_FILE)
+
+# print("\nCleaned Dataset Output:")
+# print(CLEAN_FILE)
+
+# print("\nPreprocessing Report Output:")
+# print(REPORT_FILE)
+
+
+# if not INPUT_FILE.exists():
+
+#     print("\nERROR: Input file not found!")
+
+#     print("\nPython is looking for the file here:")
+#     print(INPUT_FILE)
+
+#     print(
+#         "\nPlease place 'final_destination.xlsx' "
+#         "inside the following directory:"
+#     )
+
+#     print(
+#         RAW_DIR
+#     )
+
+#     raise FileNotFoundError(
+#         f"File not found: {INPUT_FILE}"
+#     )
+
+
+# df = pd.read_excel(
+#     INPUT_FILE
+# )
+
+
+# # Store original shape before any preprocessing
+# original_shape = df.shape
+
+
+# print("\nDataset loaded successfully.")
+
+# print(
+#     "Original Shape:",
+#     original_shape
+# )
+
+from database.db import load_raw_player_data
 
 print("=" * 80)
 print("FOOTBALL TALENT DISCOVERY - COMMON PREPROCESSING PIPELINE")
 print("=" * 80)
 
-print("\nLoading dataset...")
+print("\nLoading dataset from Neon PostgreSQL...")
 
-print("\nProject Root:")
-print(PROJECT_ROOT)
+df = load_raw_player_data()
 
-print("\nRaw Input File:")
-print(INPUT_FILE)
-
-print("\nCleaned Dataset Output:")
-print(CLEAN_FILE)
-
-print("\nPreprocessing Report Output:")
-print(REPORT_FILE)
-
-
-if not INPUT_FILE.exists():
-
-    print("\nERROR: Input file not found!")
-
-    print("\nPython is looking for the file here:")
-    print(INPUT_FILE)
-
-    print(
-        "\nPlease place 'final_destination.xlsx' "
-        "inside the following directory:"
-    )
-
-    print(
-        RAW_DIR
-    )
-
-    raise FileNotFoundError(
-        f"File not found: {INPUT_FILE}"
-    )
-
-
-df = pd.read_excel(
-    INPUT_FILE
-)
-
-
-# Store original shape before any preprocessing
 original_shape = df.shape
 
+print("\nDataset loaded successfully from Neon.")
 
-print("\nDataset loaded successfully.")
-
-print(
-    "Original Shape:",
-    original_shape
-)
-
+print("Original Shape:", original_shape)
 
 # ============================================================
 # 2. STANDARDIZE COLUMN NAMES
