@@ -65,11 +65,11 @@ RESULTS_DIR.mkdir(
 #     / "final_destination.xlsx"
 # )
 
-# # Clean master dataset
-# CLEAN_FILE = (
-#     CLEANED_DIR
-#     / "clean_player_features.csv"
-# )
+# Clean master dataset
+CLEAN_FILE = (
+    CLEANED_DIR
+    / "clean_player_features.csv"
+)
 
 # Preprocessing report
 REPORT_FILE = (
